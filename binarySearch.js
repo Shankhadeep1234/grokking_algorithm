@@ -1,3 +1,5 @@
+//Binary search - O(log n)
+
 const binarySearch = (list, item) => {
   let low = 0;
   let high = list.length - 1;
