@@ -1,25 +1,29 @@
-//Binary search - O(log n)
+const findTheSmallestIndex = (array) => {
+  let smallestElement = array[0];
+  let smallestIndex = 0;
 
-const binarySearch = (list, item) => {
-  let low = 0;
-  let high = list.length - 1;
-  while (low <= high) {
-    const mid = Math.floor((low + high) / 2);
-    const guess = list[mid];
-
-    if (guess === item) {
-      return mid;
-    }
-    if (guess > item) {
-      high = mid - 1;
-    } else {
-      low = mid + 1;
+  for (let i = 1; i < array.length; i++) {
+    if (array[i] < smallestElement) {
+      smallestElement = array[i];
+      smallestIndex = i;
     }
   }
-  return null;
+  return smallestIndex;
 };
 
-const myList = [1, 3, 5, 7, 9];
+const selectionSort = (array) => {
+  const sortingArray = [...array];
+  const sortedArray = [];
+  const length = sortingArray.length;
 
-console.log(binarySearch(myList, 3)); // 1
-console.log(binarySearch(myList, -1)); // null
+  for (let i = 0; i < length; i++) {
+    const smallest = findTheSmallestIndex(sortingArray);
+    sortedArray.push(sortingArray.splice(smallest, 1)[0]);
+    console.log("I am the sorting array", sortingArray);
+  }
+  return sortedArray;
+};
+
+const array = [5, 3, 6, 2, 10];
+console.log(selectionSort(array)); // [2, 3, 5, 6, 10]
+console.log(array); // [5, 3, 6, 2, 10]
